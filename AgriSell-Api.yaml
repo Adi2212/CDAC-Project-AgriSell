@@ -1,0 +1,1478 @@
+openapi: "3.1.0"
+info:
+  title: "agrisell_backend API"
+  description: "agrisell_backend API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:9090"
+paths:
+  /auth/register:
+    post:
+      summary: "POST auth/register"
+      operationId: "registerUser"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegistetionDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RegisterResponseDTO"
+  /auth/login:
+    post:
+      summary: "POST auth/login"
+      operationId: "login"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginReq"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LoginResponseDTO"
+  /auth/forgot-password:
+    post:
+      summary: "POST auth/forgot-password"
+      operationId: "forgotPassword"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForgotPasswordRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /auth/reset-password:
+    post:
+      summary: "POST auth/reset-password"
+      operationId: "resetPassword"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /user/address:
+    put:
+      summary: "PUT user/address"
+      operationId: "setUsersAddress"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddressDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /user/profile-photo:
+    put:
+      summary: "PUT user/profile-photo"
+      operationId: "saveProfilePhoto"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /user/profile:
+    patch:
+      summary: "PATCH user/profile"
+      operationId: "updateProfile"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /user/{id}:
+    get:
+      summary: "GET user/{id}"
+      operationId: "getUserById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /imagekit:
+    get:
+      summary: "GET imagekit"
+      operationId: "getImageKitAuth"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /products/update/{id}:
+    put:
+      summary: "PUT products/update/{id}"
+      operationId: "update"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddProductDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+  /products/add:
+    post:
+      summary: "POST products/add"
+      operationId: "add"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddProductDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+  /products/delete/{id}:
+    delete:
+      summary: "DELETE products/delete/{id}"
+      operationId: "delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /products/get:
+    get:
+      summary: "GET products/get"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ProductDTO"
+  /products/get/{id}:
+    get:
+      summary: "GET products/get/{id}"
+      operationId: "getById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDTO"
+  /products/get/category/{categoryId}:
+    get:
+      summary: "GET products/get/category/{categoryId}"
+      operationId: "getByCategory"
+      parameters:
+        - name: "categoryId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ProductDTO"
+  /products/farmer:
+    get:
+      summary: "GET products/farmer"
+      operationId: "getFarmerProducts"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ProductDTO"
+  /products/stats:
+    get:
+      summary: "GET products/stats"
+      operationId: "getStats"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FarmerStatsResponse"
+  /categories/update/{id}:
+    put:
+      summary: "PUT categories/update/{id}"
+      operationId: "updateCategory"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoryRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /categories/status/{id}/{status}:
+    put:
+      summary: "PUT categories/status/{id}/{status}"
+      operationId: "updateCategoryStatus"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "status"
+          in: "path"
+          required: true
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /categories/add:
+    post:
+      summary: "POST categories/add"
+      operationId: "addCategory"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoryRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /categories/main:
+    get:
+      summary: "GET categories/main"
+      operationId: "getMainCategories"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /categories/sub/{parentId}:
+    get:
+      summary: "GET categories/sub/{parentId}"
+      operationId: "getSubCategories"
+      parameters:
+        - name: "parentId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /categories/:
+    get:
+      summary: "GET categories/"
+      operationId: "getAllCategories"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/SubCategoryDTO"
+  /categories/{id}:
+    get:
+      summary: "GET categories/{id}"
+      operationId: "getCategoryById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CategoryDTO"
+  /orders/cancel/{orderId}:
+    put:
+      summary: "PUT orders/cancel/{orderId}"
+      operationId: "cancelOrder"
+      parameters:
+        - name: "orderId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /orders/{id}/status:
+    put:
+      summary: "PUT orders/{id}/status"
+      operationId: "updateOrderStatus"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "status"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+            enum:
+              - "PENDING"
+              - "CONFIRMED"
+              - "SHIPPED"
+              - "DELIVERED"
+              - "CANCELLED"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+  /orders/{id}/payment-failed:
+    put:
+      summary: "PUT orders/{id}/payment-failed"
+      operationId: "markPaymentFailed"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+  /orders/{id}/payment-success:
+    put:
+      summary: "PUT orders/{id}/payment-success"
+      operationId: "markPaymentSuccess"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+  /orders/create:
+    post:
+      summary: "POST orders/create"
+      operationId: "createOrder"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+  /orders/user:
+    get:
+      summary: "GET orders/user"
+      operationId: "userOrders"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/OrderResponse"
+  /orders/farmer:
+    get:
+      summary: "GET orders/farmer"
+      operationId: "getFarmerOrders"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /orders/{id}:
+    get:
+      summary: "GET orders/{id}"
+      operationId: "getOrder"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+  /payments/checkout:
+    post:
+      summary: "POST payments/checkout"
+      operationId: "checkout"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StripeResponse"
+  /payments/retry/{orderId}:
+    post:
+      summary: "POST payments/retry/{orderId}"
+      operationId: "retryPayment"
+      parameters:
+        - name: "orderId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /admin/farmers/{id}/status:
+    put:
+      summary: "PUT admin/farmers/{id}/status"
+      operationId: "toggleFarmer"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /admin/buyers/{id}/status:
+    put:
+      summary: "PUT admin/buyers/{id}/status"
+      operationId: "blockBuyer"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /admin/products/{id}/approve:
+    put:
+      summary: "PUT admin/products/{id}/approve"
+      operationId: "approveProduct"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /admin/orders/{id}/status/{status}:
+    put:
+      summary: "PUT admin/orders/{id}/status/{status}"
+      operationId: "updateOrderStatus"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "status"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /admin/products/{id}:
+    delete:
+      summary: "DELETE admin/products/{id}"
+      operationId: "deleteProduct"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /admin/farmers:
+    get:
+      summary: "GET admin/farmers"
+      operationId: "getAllFarmers"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FarmerAdminResponse"
+  /admin/buyers:
+    get:
+      summary: "GET admin/buyers"
+      operationId: "getAllBuyers"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BuyerAdminResponse"
+  /admin/products:
+    get:
+      summary: "GET admin/products"
+      operationId: "getAllProducts"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductAdminResponse"
+  /admin/orders:
+    get:
+      summary: "GET admin/orders"
+      operationId: "getAllOrders"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderAdminResponse"
+  /admin/orders/{id}:
+    get:
+      summary: "GET admin/orders/{id}"
+      operationId: "getOrderDetails"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/OrderDetailsAdminResponse"
+  /admin/orders/stats/{days}:
+    get:
+      summary: "GET admin/orders/stats/{days}"
+      operationId: "getOrderStats"
+      parameters:
+        - name: "days"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/OrderStatusStatsResponse"
+  /admin/stats:
+    get:
+      summary: "GET admin/stats"
+      operationId: "getStats"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AdminStatsResponse"
+  /reviews/add/{productId}:
+    post:
+      summary: "POST reviews/add/{productId}"
+      operationId: "addReview"
+      parameters:
+        - name: "productId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddReviewRequestDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /reviews/product/{productId}:
+    get:
+      summary: "GET reviews/product/{productId}"
+      operationId: "getReviews"
+      parameters:
+        - name: "productId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ReviewResponseDTO"
+components:
+  schemas:
+    AddressDTO:
+      type: "object"
+      properties:
+        street:
+          type: "string"
+          nullable: true
+        city:
+          type: "string"
+          nullable: true
+        state:
+          type: "string"
+          nullable: true
+        district:
+          type: "string"
+          nullable: true
+        postalCode:
+          type: "string"
+          nullable: true
+        country:
+          type: "string"
+          nullable: true
+    UserRegistetionDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        email:
+          type: "string"
+          nullable: true
+        password:
+          type: "string"
+          nullable: true
+        role:
+          type: "string"
+          nullable: true
+        phone:
+          type: "string"
+          nullable: true
+        address:
+          nullable: true
+          $ref: "#/components/schemas/AddressDTO"
+    UserDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        email:
+          type: "string"
+          nullable: true
+        phone:
+          type: "string"
+          nullable: true
+        role:
+          type: "string"
+          nullable: true
+        profileUrl:
+          type: "string"
+          nullable: true
+        address:
+          nullable: true
+          $ref: "#/components/schemas/AddressDTO"
+        accStatus:
+          type: "string"
+          nullable: true
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+    RegisterResponseDTO:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          nullable: true
+        role:
+          type: "string"
+          nullable: true
+        user:
+          nullable: true
+          $ref: "#/components/schemas/UserDTO"
+    LoginReq:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          nullable: true
+        password:
+          type: "string"
+          nullable: true
+    LoginResponseDTO:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+          nullable: true
+        message:
+          type: "string"
+          nullable: true
+        user:
+          nullable: true
+          $ref: "#/components/schemas/UserDTO"
+    ForgotPasswordRequestDTO:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          nullable: true
+    ResetPasswordRequestDTO:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+          nullable: true
+        newPassword:
+          type: "string"
+          nullable: true
+    AddProductDTO:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          nullable: true
+        description:
+          type: "string"
+          nullable: true
+        price:
+          type: "number"
+          format: "double"
+          nullable: true
+        categoryId:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        imgUrl:
+          type: "string"
+          nullable: true
+        stockQuantity:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    ParentCategoryDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+    ProductDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        description:
+          type: "string"
+          nullable: true
+        price:
+          type: "number"
+          format: "double"
+          nullable: true
+        stockQuantity:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        category:
+          nullable: true
+          $ref: "#/components/schemas/ParentCategoryDTO"
+        imgUrl:
+          type: "string"
+          nullable: true
+    FarmerStatsResponse:
+      type: "object"
+      properties:
+        totalProducts:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        pendingOrders:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        completedOrders:
+          type: "integer"
+          format: "int64"
+          nullable: true
+    CreateCategoryRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          nullable: true
+        imgUrl:
+          type: "string"
+          nullable: true
+        parentId:
+          type: "integer"
+          format: "int64"
+          nullable: true
+    SubCategoryDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        imgUrl:
+          type: "string"
+          nullable: true
+        isActive:
+          type: "boolean"
+          nullable: true
+        parent:
+          nullable: true
+          $ref: "#/components/schemas/ParentCategoryDTO"
+    CategoryDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        imgUrl:
+          type: "string"
+          nullable: true
+        parent:
+          nullable: true
+          $ref: "#/components/schemas/ParentCategoryDTO"
+        subcategories:
+          type: "array"
+          nullable: true
+          items:
+            $ref: "#/components/schemas/SubCategoryDTO"
+    AddressResponse:
+      type: "object"
+      properties:
+        street:
+          type: "string"
+          nullable: true
+        city:
+          type: "string"
+          nullable: true
+        state:
+          type: "string"
+          nullable: true
+        postalCode:
+          type: "string"
+          nullable: true
+    ProductItem:
+      type: "object"
+      properties:
+        productId:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        productName:
+          type: "string"
+          nullable: true
+    OrderItemResponse:
+      type: "object"
+      properties:
+        product:
+          nullable: true
+          $ref: "#/components/schemas/ProductItem"
+        quantity:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        price:
+          type: "number"
+          format: "double"
+          nullable: true
+        lineTotal:
+          type: "number"
+          format: "double"
+          nullable: true
+    OrderResponse:
+      type: "object"
+      properties:
+        orderId:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        totalAmount:
+          type: "number"
+          format: "double"
+          nullable: true
+        orderStatus:
+          type: "string"
+          nullable: true
+          enum:
+            - "PENDING"
+            - "CONFIRMED"
+            - "SHIPPED"
+            - "DELIVERED"
+            - "CANCELLED"
+        paymentStatus:
+          type: "string"
+          nullable: true
+          enum:
+            - "PENDING"
+            - "PAID"
+            - "FAILED"
+        deliveryAddress:
+          nullable: true
+          $ref: "#/components/schemas/AddressResponse"
+        items:
+          type: "array"
+          nullable: true
+          items:
+            $ref: "#/components/schemas/OrderItemResponse"
+        createdAt:
+          type: "string"
+          format: "date-time"
+          nullable: true
+    OrderItemRequest:
+      type: "object"
+      properties:
+        product:
+          nullable: true
+          $ref: "#/components/schemas/ProductItem"
+        quantity:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    OrderRequest:
+      type: "object"
+      properties:
+        paymentMethod:
+          type: "string"
+          nullable: true
+        items:
+          type: "array"
+          nullable: true
+          items:
+            $ref: "#/components/schemas/OrderItemRequest"
+    PaymentRequest:
+      type: "object"
+      properties:
+        orderId:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        items:
+          type: "array"
+          nullable: true
+          items:
+            $ref: "#/components/schemas/OrderItemRequest"
+    StripeResponse:
+      type: "object"
+      properties:
+        sessionId:
+          type: "string"
+          nullable: true
+        sessionUrl:
+          type: "string"
+          nullable: true
+        status:
+          type: "string"
+          nullable: true
+        message:
+          type: "string"
+          nullable: true
+    FarmerAdminResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        phone:
+          type: "string"
+          nullable: true
+        productCount:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        accStatus:
+          type: "string"
+          nullable: true
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+    BuyerAdminResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        email:
+          type: "string"
+          nullable: true
+        orderCount:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        totalSpent:
+          type: "number"
+          format: "double"
+          nullable: true
+        accStatus:
+          type: "string"
+          nullable: true
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+    ProductAdminResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        farmerName:
+          type: "string"
+          nullable: true
+        price:
+          type: "number"
+          format: "double"
+          nullable: true
+        stock:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    OrderAdminResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        buyerName:
+          type: "string"
+          nullable: true
+        totalAmount:
+          type: "number"
+          format: "double"
+          nullable: true
+        status:
+          type: "string"
+          nullable: true
+        createdAt:
+          type: "string"
+          nullable: true
+    OrderAddressResponse:
+      type: "object"
+      properties:
+        street:
+          type: "string"
+          nullable: true
+        city:
+          type: "string"
+          nullable: true
+        district:
+          type: "string"
+          nullable: true
+        state:
+          type: "string"
+          nullable: true
+        postalCode:
+          type: "string"
+          nullable: true
+    OrderItemAdminResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        productName:
+          type: "string"
+          nullable: true
+        productId:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        quantity:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        price:
+          type: "number"
+          format: "double"
+          nullable: true
+        pickUpAddress:
+          nullable: true
+          $ref: "#/components/schemas/OrderAddressResponse"
+    OrderStatusHistoryResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        status:
+          type: "string"
+          nullable: true
+        changedAt:
+          type: "string"
+          format: "date-time"
+          nullable: true
+    OrderDetailsAdminResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        buyerName:
+          type: "string"
+          nullable: true
+        totalAmount:
+          type: "number"
+          format: "double"
+          nullable: true
+        paymentMethod:
+          type: "string"
+          nullable: true
+        status:
+          type: "string"
+          nullable: true
+        createdAt:
+          type: "string"
+          format: "date-time"
+          nullable: true
+        updatedAt:
+          type: "string"
+          format: "date-time"
+          nullable: true
+        deliveryAddress:
+          nullable: true
+          $ref: "#/components/schemas/OrderAddressResponse"
+        items:
+          type: "array"
+          nullable: true
+          items:
+            $ref: "#/components/schemas/OrderItemAdminResponse"
+        history:
+          type: "array"
+          nullable: true
+          items:
+            $ref: "#/components/schemas/OrderStatusHistoryResponse"
+    OrderStatusStatsResponse:
+      type: "object"
+      properties:
+        date:
+          type: "string"
+          nullable: true
+        pending:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        confirmed:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        shipped:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        delivered:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        cancelled:
+          type: "integer"
+          format: "int64"
+          nullable: true
+    AdminStatsResponse:
+      type: "object"
+      properties:
+        farmers:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        buyers:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        products:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        orders:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        revenue:
+          type: "number"
+          format: "double"
+          nullable: true
+    AddReviewRequestDTO:
+      type: "object"
+      properties:
+        rating:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        comment:
+          type: "string"
+          nullable: true
+    ReviewResponseDTO:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        rating:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        comment:
+          type: "string"
+          nullable: true
+        buyerName:
+          type: "string"
+          nullable: true
+        createdAt:
+          type: "string"
+          format: "date-time"
+          nullable: true
