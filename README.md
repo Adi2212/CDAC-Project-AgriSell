@@ -4,7 +4,16 @@ AgriSell is an online agricultural marketplace platform developed as part of the
 It connects **farmers directly with buyers**, allowing farmers to sell agricultural products without middlemen, ensuring better profit and transparency.
 
 ---
+## 📌 Project Repositories
 
+This project is divided into two separate repositories:
+
+### 🎨 Frontend Repository (React.js)
+👉 https://github.com/Adi2212/CDAC-Project-AgriSell-Frontend
+
+### 🔧 Backend Repository (Spring Boot)
+👉 https://github.com/Adi2212/CDAC-Project-AgriSell-Backend
+---
 ## 📌 Project Overview
 
 AgriSell is designed to:
