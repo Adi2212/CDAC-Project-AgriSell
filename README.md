@@ -9,10 +9,10 @@ It connects **farmers directly with buyers**, allowing farmers to sell agricultu
 This project is divided into two separate repositories:
 
 ### 🎨 Frontend Repository (React.js)
-👉 https://github.com/Adi2212/CDAC-Project-AgriSell-Frontend
+👉 https://github.com/Adi2212/AgriSell-Frontend
 
 ### 🔧 Backend Repository (Spring Boot)
-👉 https://github.com/Adi2212/CDAC-Project-AgriSell-Backend
+👉 https://github.com/Adi2212/AgriSell-Backend
 
 ---
 ## 📌 Project Overview
