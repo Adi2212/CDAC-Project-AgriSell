@@ -77,8 +77,6 @@ CDAC-Project-AgriSell/
 │
 ├── frontend/        # React UI
 ├── backend/         # Spring Boot APIs
-├── database/        # SQL Scripts
-├── screenshots/     # Project Output Screens
 └── README.md        # Documentation
 ```
 
@@ -164,7 +162,7 @@ http://localhost:3000
 CREATE DATABASE agrisell;
 ```
 
-2. Import SQL scripts (if provided inside `/database` folder).
+2. Import SQL scripts .
 
 ---
 
@@ -183,10 +181,7 @@ Example:
 ## 🎯 Future Enhancements
 
 - Online Payment Integration  
-- Delivery Tracking System  
-- Farmer–Buyer Chat Support  
-- Mobile App Version  
-- Product Recommendation using ML  
+- Delivery Tracking System   
 
 ---
 
